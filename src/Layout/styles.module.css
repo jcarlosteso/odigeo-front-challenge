@@ -1,4 +1,13 @@
 .navBar {
   height: 2rem;
-  background-color: rgb(0, 93, 173)
+  background-color: rgb(0, 93, 173);
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 0.8rem;
+  line-height: 2rem;
+}
+
+.logo {
+  height: 100%;
 }

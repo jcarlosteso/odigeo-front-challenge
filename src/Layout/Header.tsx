@@ -1,9 +1,12 @@
+import { Link } from "react-router-dom"
 import styles from "./styles.module.css"
 
 const Header = () => (
   <header className={styles.navBar}>
-    <img src="images/logo.jpg" />
-    ODIGEO Frontend challenge
+    <Link className={styles.logo} to="/">
+      <img className={styles.logo} src="images/logo.jpg" />
+    </Link>
+    <h2>ODIGEO Frontend challenge</h2>
   </header>
 )
 
