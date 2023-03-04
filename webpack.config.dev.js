@@ -1,11 +1,21 @@
 const path = require('path');
 
 module.exports = {
+  mode: 'development',
+  devtool: 'source-map',
+
   entry: './src/index.js',
+  
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'public')
   },
+  
+  watch: true,
+  watchOptions: {
+    ignored: '/node_modules/'
+  },
+
   module: {
     rules: [
       {
@@ -39,5 +49,12 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx']
+  },
+  devServer: {
+    contentBase: path.resolve(__dirname, 'public'),
+    compress: false,
+    historyApiFallback: true,
+    hot: true,
+    port: 3000
   }
 };
