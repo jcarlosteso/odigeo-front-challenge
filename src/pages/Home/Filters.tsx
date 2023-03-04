@@ -23,7 +23,8 @@ const Filters = (props: FiltersProps) => {
   useEffect(() => {
     const loader = async () => {
       setLoading(true)
-      setLocations(await getAllLocations())
+      const list = await getAllLocations()
+      setLocations(list.sort((l1, l2) => (l1.name.toLocaleLowerCase()).localeCompare(l2.name.toLocaleLowerCase())))
       setLoading(false)
     }
     
@@ -41,15 +42,17 @@ const Filters = (props: FiltersProps) => {
       <Location
         className={`${styles.field} ${styles.location}`}
         name="origin"
-        placeholder="Where from?"
         locations={locations}
+        placeholder="Where from?"
         value={values.origin}
         onChange={onChange}
       />
       <Location
         className={`${styles.field} ${styles.location}`}
         name="destination"
+        locations={locations}
         placeholder="Where to?"
+        value={values.destination}
         onChange={onChange}
       />
       <DatePicker
