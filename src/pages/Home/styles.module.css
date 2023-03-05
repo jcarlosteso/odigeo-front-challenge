@@ -33,6 +33,19 @@
   text-transform: none;
 }
 
+.locations {
+  z-index: 1000;
+  position: absolute;
+  box-shadow: 5px 5px 5px lightgrey;
+  transform: translateY(-1.1rem);
+  width: calc(100% - 2rem);
+  border: 1px solid gray;
+  padding: 1rem;
+  font-family: inherit;
+  font-size: inherit;
+  border-radius: 0 0 0.3rem 0.3rem;
+}
+
 @media screen and (min-device-aspect-ratio: 1) {
   .page {
     flex-direction: row;
