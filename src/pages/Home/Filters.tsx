@@ -31,14 +31,10 @@ const Filters = (props: FiltersProps) => {
     loader()
   }, [])
 
-  const handleDateChange = (dateString: string) => {
-    if (!onChange) return
-
-    onChange({ departure: new Date(dateString) })
-  }
+  const handleDateChange = (dateString: string) => onChange({ departure: new Date(dateString) })
 
   return (
-    <>
+    <div className={styles.filters}>
       <Location
         className={`${styles.field} ${styles.location}`}
         name="origin"
@@ -58,9 +54,10 @@ const Filters = (props: FiltersProps) => {
       <DatePicker
         className={styles.field}
         name="departure"
+        value={values.departure}
         onChange={handleDateChange}
       />
-    </>
+    </div>
   )
 }
 

@@ -1,5 +1,8 @@
 .page {
   padding: 1rem;
+}
+
+.page, .filters {
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
@@ -44,6 +47,19 @@
   font-family: inherit;
   font-size: inherit;
   border-radius: 0 0 0.3rem 0.3rem;
+}
+
+.search {
+  background-color: #005dad;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  padding: 1rem;
+  border-radius: 3rem;
+}
+
+.search:hover {
+  background-color: #5cb4ff;
 }
 
 @media screen and (min-device-aspect-ratio: 1) {

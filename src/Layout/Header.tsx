@@ -3,7 +3,7 @@ import styles from "./styles.module.css"
 
 const Header = () => (
   <header className={styles.navBar}>
-    <Link className={styles.logo} to="/">
+    <Link className={styles.link} to="/">
       <img className={styles.logo} src="images/logo.jpg" />
     </Link>
     <h2>ODIGEO Frontend challenge</h2>

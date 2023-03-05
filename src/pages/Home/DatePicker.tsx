@@ -1,22 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { isoDate } from '../../utils';
 
 export interface DatePickerProps {
   name: string;
   className: string;
-  value: Date | null;
+  value?: Date;
   onChange?: (dateString: string) => void;
 }
 
-const isoDate = (d: Date): string => d.toISOString().split("T")[0]
-
-const TODAY = isoDate(new Date())
-
 const DatePicker = (props: DatePickerProps) => {
   const { className, name, onChange, value } = props
+  const [ date, setDate ] = useState("")
 
+  useEffect(() => {
+    setDate(value ? isoDate(value) : "")
+  }, [value])
+  
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     if (!onChange) return
-    const { value } = e.target
+    const { value } = e.target as HTMLInputElement
 
     onChange(isoDate(new Date(value)))
   }
@@ -26,8 +28,7 @@ const DatePicker = (props: DatePickerProps) => {
       type="date"
       name={name}
       className={className}
-      min={TODAY}
-      value={value || TODAY}
+      value={date}
       onChange={handleChange}
     />
   )
