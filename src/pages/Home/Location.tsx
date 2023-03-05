@@ -27,7 +27,9 @@ const SelectList = React.forwardRef((props: SelectListProps, ref: React.Forwarde
     const { key, target } = e
     const select: HTMLSelectElement = target as HTMLSelectElement
 
-    if (key === 'ArrowUp' && (select.selectedIndex === 0)) {
+    if (key === 'Escape') {
+      onCancel()
+    } else if (key === 'ArrowUp' && (select.selectedIndex === 0)) {
       linkedInput?.current?.focus()
     } else if (key === 'Enter' && (select.selectedIndex !== -1)) {
       onSelect(select.value)
@@ -42,7 +44,7 @@ const SelectList = React.forwardRef((props: SelectListProps, ref: React.Forwarde
         size={4}
         style={{ zIndex: 1000 }}
         onClick={e => onSelect((e.target as HTMLOptionElement).value)}
-        // onFocus={}
+        onFocus={e => {if (e.target.selectedIndex === -1) e.target.selectedIndex = 0}}
         onBlur={onCancel}
         onKeyDown={handleKeyDown}
       >
@@ -74,6 +76,8 @@ const Location = (props: LocationProps) => {
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowDown' && !visibleSuggestions) viewSuggestions(true) 
+
     if ((suggested && suggested.length > 0) && e.key === 'ArrowDown' && selectorRef.current) {
       selectorRef.current.focus()
     }
@@ -85,6 +89,11 @@ const Location = (props: LocationProps) => {
       onChange({ [name as keyof FilterValues]: value })
       viewSuggestions(false)
     }
+  }
+
+  const handleCancel = () => {
+    viewSuggestions(false)
+    if (textRef?.current) textRef.current.focus()
   }
 
   return (
@@ -101,7 +110,7 @@ const Location = (props: LocationProps) => {
       />
       {
         (visibleSuggestions && suggested && suggested.length > 0)
-          ? <SelectList ref={selectorRef} linkedInput={textRef} values={suggested} onSelect={handleSelect} onCancel={() => console.log('cancelled')} />
+          ? <SelectList ref={selectorRef} linkedInput={textRef} values={suggested} onSelect={handleSelect} onCancel={handleCancel} />
           : null
       }
     </>

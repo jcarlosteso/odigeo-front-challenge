@@ -12,7 +12,7 @@ export interface FilterValues {
 
 interface FiltersProps {
   values: FilterValues;
-  onChange?: (change: Partial<FilterValues>) => void;
+  onChange: (change: Partial<FilterValues>) => void;
 }
 
 const Filters = (props: FiltersProps) => {
