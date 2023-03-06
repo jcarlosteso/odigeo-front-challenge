@@ -1,0 +1,17 @@
+.container {
+  height: 100%;
+  display: flex;
+  column-gap: 0.2rem;
+  align-items: center;
+  color: rgb(144, 144, 144);
+}
+
+.container img {
+  height: 1rem;
+}
+
+@media screen and (orientation: landscape) {
+  .container {
+    column-gap: unset;
+  }
+}

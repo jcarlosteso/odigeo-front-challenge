@@ -27,7 +27,7 @@ const Itineraries = () => {
   const origin = params.get('origin')
   const destination = params.get('destination')
   const departureParam = params.get('departure')
-  
+
   const departure = departureParam ? new Date(departureParam) : null
 
   const filters: FilterValues = {
@@ -36,9 +36,9 @@ const Itineraries = () => {
     departure: departure ?? undefined
   }
 
-  const [ loading, setLoading ] = useState(false)
-  const [ itineraries, setItineraries ] = useState<ItineraryCardData[]>([])
-  const [ fastestIndex, setFastestIndex ] = useState(-1)
+  const [loading, setLoading] = useState(false)
+  const [itineraries, setItineraries] = useState<ItineraryCardData[]>([])
+  const [fastestIndex, setFastestIndex] = useState(-1)
 
   const tagger = useMemo(() => ({
     0: 'Cheapest',
@@ -56,7 +56,7 @@ const Itineraries = () => {
 
         return (
           {
-            ...itinerary, 
+            ...itinerary,
             milliseconds: arrival.valueOf() - departure.valueOf(),
             duration: `${hours}h${minutes > 0 ? ` ${minutes}` : ''}'`
           }
@@ -66,7 +66,6 @@ const Itineraries = () => {
       cards.sort(compareItineraries)
 
       const [_, index] = cards.reduce((current, { milliseconds }, index) => {
-        console.log(current, [milliseconds, index])
         if (milliseconds < current[0]) return [milliseconds, index]
         return current
       }, [Infinity, -1])

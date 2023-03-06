@@ -1,4 +1,4 @@
-import styles from '../styles.module.css'
+import styles from './styles.module.css'
 
 export interface TripProps {
   duration: string;
@@ -17,13 +17,13 @@ const Trip = (props: TripProps) => {
   const { duration } = props
   
   return (
-    <div className={styles.trip}>
+    <div className={styles.container}>
       <span className={styles.decoration}>
         <hr />
         <Plane />
         <hr />
       </span>
-      <small className={duration}>
+      <small className={styles.duration}>
         {duration}
       </small>
     </div>

@@ -1,0 +1,49 @@
+.container {
+  padding: 0.7rem;
+  border-radius: 0.7rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 16px 0px;
+  font-size: 0.8rem;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 2rem;
+}
+
+.tag {
+  border: 2px solid rgb(32, 155, 135);
+  color:rgb(32, 155, 135);
+  padding: 0.2rem;
+  border-radius: 0.5rem;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.price {
+  text-align: right;
+}
+
+@media screen and (orientation: landscape) {
+  .container {
+    padding: 1rem;
+    margin: 0 15%;
+  }
+
+  .route {
+    display: flex;
+    column-gap: 0.2rem;
+    align-items: flex-start;
+  }
+
+  .logo {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}

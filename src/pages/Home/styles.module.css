@@ -63,7 +63,7 @@
   background-color: #5cb4ff;
 }
 
-@media screen and (min-device-aspect-ratio: 1) {
+@media screen and (orientation: landscape) {
   .page {
     background-image: url("/public/images/home.jpg");
     background-size: cover;

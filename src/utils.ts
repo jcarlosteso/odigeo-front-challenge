@@ -21,3 +21,5 @@ export const plusDays = (from: Date, to: Date): number => {
   const lastDay = new Date(new Date(`${to.getFullYear()}-${mmTo}-01`).valueOf() - DAY_MSECS)
   return (lastDay.getDate() - ddFrom + ddTo)
 }
+
+export const isLandscape = () => window.matchMedia('screen and (orientation: landscape)').matches

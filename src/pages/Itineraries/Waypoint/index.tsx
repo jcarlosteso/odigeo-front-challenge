@@ -1,4 +1,4 @@
-import styles from '../styles.module.css'
+import styles from './styles.module.css'
 
 const timeFormatter = new Intl.DateTimeFormat(undefined, { hour: '2-digit', minute: '2-digit'})
 
@@ -14,7 +14,7 @@ const Waypoint = (props: WaypointProps) => {
   const time = timeFormatter.format(moment)
 
   return (
-    <div className={styles.waypoint}>
+    <div className={styles.container}>
       <span className={styles.time}>
         <h2 style={{ textAlign: align || 'left' }}>{time}</h2>
         {
