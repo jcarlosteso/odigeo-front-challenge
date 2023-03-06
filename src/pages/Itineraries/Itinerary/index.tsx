@@ -23,6 +23,11 @@ interface TagProps {
 
 const Tag = (props: TagProps) => <span className={styles.tag}>{props.text}</span>
 
+const euros = (value: number) => new Intl.NumberFormat(undefined, {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+}).format(value)
+
 const Itinerary = (props: ItineraryProps) => {
   const { arrival, carrier, departure, destination, duration, origin, price } = props.data
   const { tag } = props
@@ -50,7 +55,7 @@ const Itinerary = (props: ItineraryProps) => {
           isLandscape() && <div className={styles.separator} />
         }
         <h1 className={styles.price}>
-          <small>€</small>{price}
+          <small>€</small>{euros(price)}
         </h1>
       </div>
     </div>
