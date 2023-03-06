@@ -37,20 +37,17 @@ const SelectList = React.forwardRef((props: SelectListProps, ref: React.Forwarde
   }
 
   return (
-    <div>
-      <select
-        ref={ref}
-        className={styles.locations}
-        size={4}
-        style={{ zIndex: 1000 }}
-        onClick={e => onSelect((e.target as HTMLOptionElement).value)}
-        onFocus={e => {if (e.target.selectedIndex === -1) e.target.selectedIndex = 0}}
-        onBlur={onCancel}
-        onKeyDown={handleKeyDown}
-      >
-        {values.map(({ name }) => <option value={name}>{name}</option>)}
-      </select>
-    </div>
+    <select
+      ref={ref}
+      className={styles.locations}
+      size={4}
+      onClick={e => onSelect((e.target as HTMLOptionElement).value)}
+      onFocus={e => {if (e.target.selectedIndex === -1) e.target.selectedIndex = 0}}
+      onBlur={onCancel}
+      onKeyDown={handleKeyDown}
+    >
+      {values.map(({ name }) => <option value={name}>{name}</option>)}
+    </select>
   )
 })
 
@@ -97,7 +94,7 @@ const Location = (props: LocationProps) => {
   }
 
   return (
-    <>
+    <span className={styles.wrapper}>
       <input
         ref={textRef}
         className={className}
@@ -113,7 +110,7 @@ const Location = (props: LocationProps) => {
           ? <SelectList ref={selectorRef} linkedInput={textRef} values={suggested} onSelect={handleSelect} onCancel={handleCancel} />
           : null
       }
-    </>
+    </span>
   )
 }
 

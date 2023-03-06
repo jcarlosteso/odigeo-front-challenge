@@ -44,6 +44,14 @@ module.exports = {
               }
             }, 
         ]
+      },
+      {
+        test: /\.(png|jpe?g)$/i,
+        use: [
+          {
+            loader: 'file-loader'
+          }
+        ]
       }
     ]
   },

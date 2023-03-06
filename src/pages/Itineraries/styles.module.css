@@ -116,3 +116,19 @@
 .price {
   text-align: right;
 }
+
+@media screen and (min-device-aspect-ratio: 1) {
+  .travel {
+    font-size: unset;
+    padding: 1rem 20%;
+  }
+
+  .itineraries {
+    padding: 2rem 20%;
+  }
+
+  .itinerary {
+    padding: 1rem;
+    margin: 0 15%;
+  }
+}

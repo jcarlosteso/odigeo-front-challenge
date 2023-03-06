@@ -40,13 +40,14 @@
   z-index: 1000;
   position: absolute;
   box-shadow: 5px 5px 5px lightgrey;
-  transform: translateY(-1.1rem);
-  width: calc(100% - 2rem);
+  transform: translateY(3rem);
   border: 1px solid gray;
   padding: 1rem;
   font-family: inherit;
   font-size: inherit;
   border-radius: 0 0 0.3rem 0.3rem;
+  width: calc(100% - 2rem);
+  left: 1rem;
 }
 
 .search {
@@ -64,20 +65,49 @@
 
 @media screen and (min-device-aspect-ratio: 1) {
   .page {
+    background-image: url("/public/images/home.jpg");
+    background-size: cover;
+    height: 40vh;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .filters {
     flex-direction: row;
+    width: 60%;
+  }
+
+  .wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
   }
 
   .field {
     border-radius: 0;
+    height: 3rem;
   }
 
-  .field:first-child {
+  .filters .wrapper:first-of-type .field {
     border-radius: 0.3rem 0 0 0.3rem;
     border-right: none;
   }
 
-  .field:last-child {
+  .filters input[type="date"] {
     border-radius: 0 0.3rem 0.3rem 0;
     border-left: none;
+  }
+
+  .locations {
+    position: absolute;
+    left: 0;
+    transform: translateY(3rem);
+    width: 100%;
+  }
+
+  .search {
+    align-self: flex-end;
+    margin-right: 20%;
   }
 }
