@@ -1,0 +1,118 @@
+.travel {
+  background-color: white;
+  box-shadow: 3px 3px 3px lightgray;
+  font-size: 0.8rem;
+  padding: 0.4rem;
+  position: sticky;
+  top: 3rem;
+}
+
+.travel p {
+  color: gray;
+  text-transform: capitalize;
+  margin-top: 0.2rem;
+}
+
+.itineraries {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  padding: 2rem;
+}
+
+.itinerary {
+  padding: 0.7rem;
+  border-radius: 0.7rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 16px 0px;
+  font-size: 0.8rem;
+}
+
+.itinerary .heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 2rem;
+}
+
+.carrier {
+  height: 100%;
+  display: flex;
+  column-gap: 0.2rem;
+  align-items: center;
+  color: rgb(144, 144, 144);
+}
+
+.carrier img {
+  height: 1rem;
+}
+
+.tag {
+  border: 2px solid rgb(32, 155, 135);
+  color:rgb(32, 155, 135);
+  padding: 0.2rem;
+  border-radius: 0.5rem;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.waypoint {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.3rem;
+}
+
+.waypoint p {
+  color: rgb(144, 144, 144);
+}
+
+.waypoint .time {
+  display: flex;
+  column-gap: 0.1rem;
+}
+
+.waypoint .time .plus {
+  color: rgb(76, 76, 76);
+  line-height: 100%;
+}
+
+.trip {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.2rem;
+  align-items: center;
+}
+
+.trip .decoration {
+  display: flex;
+  column-gap: 0.1rem;
+  align-items: center;
+  width: 7rem;
+}
+
+.trip .decoration hr {
+  border: none;
+  border-top: 1px dashed rgb(48, 139, 178);
+  width: 100%;
+  height: 0;
+}
+
+.trip .decoration .plane {
+  color: rgb(48, 139, 178);
+  width: 16px;
+  height: 16px;
+  fill: currentcolor;
+  flex-shrink: 0;
+}
+
+.trip .duration {
+  color: rgb(76, 76, 76);
+  font-size: 0.5rem;
+}
+
+.price {
+  text-align: right;
+}
