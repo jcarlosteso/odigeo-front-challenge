@@ -23,7 +23,6 @@ interface TagProps {
 
 const Tag = (props: TagProps) => <span className={styles.tag}>{props.text}</span>
 
-
 const Itinerary = (props: ItineraryProps) => {
   const { arrival, carrier, departure, destination, duration, origin, price } = props.data
   const { tag } = props
@@ -47,8 +46,11 @@ const Itinerary = (props: ItineraryProps) => {
             <Waypoint city={destination} moment={arrival} align='right' plus={plusDays(departure, arrival)} />
           </div>
         </span>
+        {
+          isLandscape() && <div className={styles.separator} />
+        }
         <h1 className={styles.price}>
-          €{price}
+          <small>€</small>{price}
         </h1>
       </div>
     </div>

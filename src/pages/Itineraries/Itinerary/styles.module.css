@@ -30,6 +30,10 @@
   text-align: right;
 }
 
+.price small {
+  font-size: 1rem;
+}
+
 @media screen and (orientation: landscape) {
   .container {
     padding: 1rem;
@@ -40,10 +44,23 @@
     display: flex;
     column-gap: 0.2rem;
     align-items: flex-start;
+    width: 100%;
   }
 
   .logo {
     width: 1.5rem;
     height: 1.5rem;
+  }
+
+  .ticket {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 0.5rem;
+  }
+
+  .separator {
+    width: 0;
+    border-left: 0.5px dashed rgb(203, 203, 203);
+    border-right: 0.5px dashed rgb(203, 203, 203);
   }
 }
