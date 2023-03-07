@@ -42,11 +42,12 @@ const SelectList = React.forwardRef((props: SelectListProps, ref: React.Forwarde
       className={styles.locations}
       size={4}
       onClick={e => onSelect((e.target as HTMLOptionElement).value)}
-      onFocus={e => {if (e.target.selectedIndex === -1) e.target.selectedIndex = 0}}
+      onFocus={e => e.target.selectedIndex = 0}
       onBlur={onCancel}
       onKeyDown={handleKeyDown}
+      autoFocus
     >
-      {values.map(({ name }) => <option value={name}>{name}</option>)}
+      {values.map(({ name }, index) => <option key={`option_${index}`} value={name}>{name}</option>)}
     </select>
   )
 })

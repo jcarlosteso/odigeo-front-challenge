@@ -1,0 +1,145 @@
+import { render, screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import '@testing-library/jest-dom'
+
+import Location from '../pages/Home/Location'
+
+const TEST_LOCATIONS = [
+  {name: 'Albacete'},
+  {name: 'Barcelona'},
+  {name: 'Cáceres'},
+  {name: 'Don Benito'},
+  {name: 'Elche'},
+  {name: 'Palencia'},
+  {name: 'Plasencia'},
+  {name: 'Valencia'},
+]
+
+const TEST_PLACEHOLDER = "Test placeholder"
+
+describe("Location component", () => {
+  test('Has the appropriate properties', async () => {
+    render(
+      <Location
+        className="test-class"
+        locations={TEST_LOCATIONS}
+        name="test-location"
+        placeholder={TEST_PLACEHOLDER}
+        value="Test"
+        onChange={(value) => console.log(value)}
+      />
+    )
+  
+    await waitFor(() => screen.getByPlaceholderText(TEST_PLACEHOLDER))
+  
+    const input = screen.getByPlaceholderText(TEST_PLACEHOLDER)
+  
+    expect(input).toHaveProperty('name', 'test-location')
+    expect(input).toHaveDisplayValue('Test')
+    expect(input).toHaveClass('test-class')
+  })  
+})
+
+const setup = async () => {
+  render(
+    <Location
+      className="test-class"
+      locations={TEST_LOCATIONS}
+      name="test-location"
+      placeholder={TEST_PLACEHOLDER}
+      onChange={() => {}}
+    />
+  )
+
+  await waitFor(() => screen.getByPlaceholderText(TEST_PLACEHOLDER))
+  const input = screen.getByPlaceholderText(TEST_PLACEHOLDER)
+
+  const user = userEvent.setup()
+  return ({ user, input })
+}
+
+describe("Dropdown list usability", () => {
+  test('Does not show dropdown on inputs with less than 3 characters', async () => {
+    const { user, input } = await setup()
+
+    await user.type(input, 'al')
+    expect(input).toHaveDisplayValue('al')
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
+  })
+
+  test('Shows dropdown on inputs with 3 or more characters', async () => {
+    const { user, input } = await setup()
+
+    await user.type(input, 'alb')
+    expect(input).toHaveDisplayValue('alb')
+    expect(screen.queryByRole('listbox')).toBeInTheDocument()
+  })
+
+  test('If text changes and becomes too short, hides dropdown', async () => {
+    const { user, input } = await setup()
+
+    await user.type(input, 'alb')
+    await user.type(input, '{backspace}')
+
+    expect(input).toHaveDisplayValue('al')
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
+  })
+
+  test('Filters options correctly', async () => {
+    const { user, input } = await setup()
+    await user.click(input)
+  
+    await user.keyboard('enci')
+    await waitFor(()=> screen.queryByRole('listbox'))
+  
+    expect(screen.getAllByRole('option')).toHaveLength(3)
+    const options = screen.getAllByRole('option')
+    expect(screen.getByRole('option', {name: 'Palencia'})).toBeInTheDocument()
+    expect(screen.getByRole('option', {name: 'Plasencia'})).toBeInTheDocument()
+    expect(screen.getByRole('option', {name: 'Valencia'})).toBeInTheDocument()
+    expect(screen.queryByRole('option', {name: 'Albacete'})).not.toBeInTheDocument()
+  })
+  
+  test('Arrow down moves focus to listbox if it has options', async () => {
+    const { user, input } = await setup()
+    
+    await user.click(input)
+    
+    await user.keyboard('enci')
+    await waitFor(() => screen.getByRole('listbox'))
+    const select = screen.getByRole('listbox')
+  
+    await user.keyboard('{ArrowDown}')
+    expect(select).toHaveFocus()
+    expect(screen.getByRole('option', {name: 'Palencia'}).selected).toBe(true)
+
+    await user.keyboard('{ArrowUp}')
+    expect(input).toHaveFocus()
+    expect(select).not.toBeInTheDocument()
+  })
+
+  test('Arrows up and down change selection', async () => {
+    const { user, input } = await setup()
+    
+    await user.click(input)
+
+    await user.type(input, 'enci')
+    await waitFor(() => screen.getByRole('listbox'))
+    await user.type(input, '{ArrowDown}')
+
+    await waitFor(() => screen.getByRole('listbox'))
+    const select = screen.getByRole('listbox')
+
+    expect(select).toHaveFocus()
+    // If we don't skip the click, the first option is selected and pressing arrows doesn't change that
+    await user.type(select, '{ArrowDown}{ArrowDown}{ArrowUp}{Enter}')
+    // If we skip click, the select doesn't even get the focus and the first option is not selected
+    // await user.type(select, '{ArrowDown}{ArrowDown}{ArrowUp}{Enter}', {skipClick: true})
+    
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
+    // This assertion always fails!! It's as if the arrow keypresses were not being processed
+    // If we don't skip click, the value received is 'Palencia'
+    // If we skip click, the value received is 'enc'
+    expect((input as HTMLInputElement).value).toBe('Plasencia')
+  })
+})
